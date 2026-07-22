@@ -49,4 +49,12 @@ for stats in body_stats:
     
    
 # EXTRAI OS DADOS PARA CSV PELO PANDAS
-stats_df = pd.DataFrame.from_dict()
+stats_df = pd.DataFrame.from_dict(stats_list ,orient = 'index')
+
+# MANIPULA A TABELA DISPONIBILIZADA PELO PANDAS 
+stats_df['player_name'] = stats_df.index
+stats_df.columns = ['player_name', 'player_country', 'player_pos', 'player_age', 'player_mp', 'player_starts', 'player_mins', 'player_90s', 'player_goals', 'player_assists', 'player_ga', 'player_npk', 'player_pk', 'player_pkatt', 'player_yellowcard', 'player_redcard', 'player_goalsper90s', 'player_assistsper90s', 'player_gaper90s', 'player_npkper90s', 'player_npkassistsper90s']
+stats_df = stats_df.reset_index(drop=True)
+
+# EXPORTA A DATAFRAME PARA CSV
+stats_df.to_csv('stats_palmeiras_atualizado.csv')
